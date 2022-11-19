@@ -29,4 +29,7 @@ contract BeerWineStoreFacet {
     function setMinAge(uint256 _minAge) external {
         LibBeerWineStore.diamondStorage().minAge = _minAge;
     }
+    function getBeerStoreItems() external view returns (string[] memory itemList){
+        itemList = LibStore.getItemsPerStore(address(this));
+    }
 }

@@ -27,4 +27,8 @@ contract StoreBaseFacet {
         itemCount = LibStore.diamondStorage().salesPerProduct[_idx];
         return itemCount;
     }
+
+    function getAddr() external view returns(address myAddr){
+        myAddr = address(this);
+    }
 }

@@ -24,5 +24,5 @@ contract PharmacyWineFacet is BeerWineStoreFacet{
     function buyMedicine(uint256 _idx, bool hasPrescription) external {
         LibPharmacyWineFacet.enforcePrescription(hasPrescription);
         LibStore.buyItem(_idx,address(this));
-    } 
+    }
 }

@@ -140,7 +140,7 @@ describe("Diamond 1 : Small Store", async () => {
       expect(meatList).to.be.eql(["Lamb"]);
     });
 
-    it("should fail to meat to meat store if not owner", async () => {
+    it("should fail to add to meat store if not owner", async () => {
       let { cMeatStoreFacetProxy, cMeatStoreFacet, cDiamondCutFacet, sig2 } =
         await loadFixture(defaultFixture);
       const { deployerAddr } = await getNamedAccounts();

@@ -237,7 +237,7 @@ describe("Diamond 2 & 1: Big Store", async () => {
         )
       ).to.be.reverted;
 
-      const deleted = ['addAlcohol(string)','setMinAge(uint256)'];
+      const deleted = ['addAlcohol(string)','setMinAge(uint256)','getBeerStoreItems()'];
 
       await withConfirmation(
         cDiamondCutFacet2.diamondCut(
@@ -254,6 +254,9 @@ describe("Diamond 2 & 1: Big Store", async () => {
         )
       );
 
+      //No More BeerStore
+      await expect(cBeerWineStoreFacetProxy2.addAlcohol('Heineken')).to.be.reverted
+
       await withConfirmation(
         cDiamondCutFacet2.diamondCut(
           [
@@ -269,6 +272,10 @@ describe("Diamond 2 & 1: Big Store", async () => {
         )
       );
 
+      await cPharmacyWineFacetProxy2.addAlcohol('Heineken');
+      const storeItems = await cStoreBaseFacetProxy1.getAddr();
+      console.log(storeItems, cStoreBaseFacetProxy1.address);
+      // expect(await cPharmacyWineFacetProxy2.getStoreItems())
     })
   });
 });
