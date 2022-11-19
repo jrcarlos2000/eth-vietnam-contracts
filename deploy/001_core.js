@@ -13,8 +13,8 @@ async function deployDiamond () {
 
   const {deployerAddr} = await getNamedAccounts();
 
-  const dDiamondInit = await deployWithConfirmation(`${diamondName}DiamondInit`)
-  const cDiamondInit = await ethers.getContractAt(`${diamondName}DiamondInit`,dDiamondInit.address)
+  const dDiamondInit = await deployWithConfirmation(`SmallStoreDiamondInit`)
+  const cDiamondInit = await ethers.getContractAt(`SmallStoreDiamondInit`,dDiamondInit.address)
 
   const FacetNames = [
     'DiamondCutFacet',
@@ -44,12 +44,13 @@ async function deployDiamond () {
   }
 
   // deploy Diamond
-  const dDiamond = await deployWithConfirmation(`${diamondName}Diamond`,[facetCuts,diamondArgs])
+  const dDiamond = await deployWithConfirmation(`SmallStoreDiamond`,[facetCuts,diamondArgs])
 
   // deploy Facets 
   await deployWithConfirmation("MeatStoreFacet");
   await deployWithConfirmation("StoreBaseFacet");
   await deployWithConfirmation("BeerWineStoreFacet");
+  await deployWithConfirmation("PharmacyWineFacet");
 
 }
 
@@ -58,5 +59,5 @@ const main = async () => {
 };
 
 main.id = "001_core";
-main.skip = () => diamondName != "SmallStore";
+main.skip = () => (diamondName != "SmallStore") && diamondName;
 module.exports = main;

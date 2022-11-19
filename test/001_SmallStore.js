@@ -10,7 +10,7 @@ const {
 const { parseUnits } = require("ethers/lib/utils");
 const { withConfirmation } = require("../utils/deploy");
 
-if (diamondName != "SmallStore") {
+if (!diamondName || diamondName != "SmallStore") {
   return;
 }
 

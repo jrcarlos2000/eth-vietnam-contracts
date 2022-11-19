@@ -8,7 +8,7 @@ pragma solidity ^0.8.0;
 * Contract used to initialize state variables during deployment or upgrade
 /******************************************************************************/
 
-import { LibBigDiamond } from "../libraries/LibDiamond.sol";
+import { LibDiamond } from "../libraries/LibDiamond.sol";
 import { IDiamondLoupe } from "../interfaces/IDiamondLoupe.sol";
 import { IDiamondCut } from "../interfaces/IDiamondCut.sol";
 import { IERC173 } from "../interfaces/IERC173.sol";
@@ -32,7 +32,7 @@ contract BigStoreDiamondInit  {
     // data to set your own state variables
     function init(Args memory args) external {
         // adding ERC165 data
-        LibBigDiamond.DiamondStorage storage ds = LibBigDiamond.diamondStorage();
+        LibDiamond.DiamondStorage storage ds = LibDiamond.diamondStorage();
         ds.supportedInterfaces[type(IERC165).interfaceId] = true;
         ds.supportedInterfaces[type(IDiamondCut).interfaceId] = true;
         ds.supportedInterfaces[type(IDiamondLoupe).interfaceId] = true;

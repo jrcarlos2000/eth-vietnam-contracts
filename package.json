@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy": "npx hardhat deploy",
+    "deploy:smallstore" : "DIAMOND_NAME=SmallStore npx hardhat deploy",
+    "deploy:bigstore" : "DIAMOND_NAME=BigStore npx hardhat deploy",
     "clean": "npx hardhat clean",
     "compile": "npx hardhat compile",
     "accounts": " npx hardhat accounts",
@@ -16,7 +18,9 @@
     "deploy:mainnet" : "NETWORK=mainnet npx hardhat deploy --network localhost",
     "fund:bsc" : "npx hardhat --network localhost fund --fundnetwork bsc",
     "fund:polygon" : "npx hardhat --network localhost fund --fundnetwork polygon",
-    "test" : "npx hardhat test"
+    "test" : "npx hardhat test",
+    "test:smallstore" : "DIAMOND_NAME=SmallStore npx hardhat test",
+    "test:bigstore" : "DIAMOND_NAME=BigStore npx hardhat test"
   },
 
   "devDependencies": {

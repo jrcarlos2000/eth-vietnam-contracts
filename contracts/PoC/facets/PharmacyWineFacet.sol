@@ -7,26 +7,22 @@ import {LibMeatStore} from "../libraries/LibOthers.sol";
 // import to be able to interact with "enforcecontractowner"
 import {LibDiamond} from "../libraries/LibDiamond.sol"; 
 
-contract PharmacyWineFacet {
+// i want to add a new facets that inherits from BeerWineStore 
+import {BeerWineStoreFacet} from "./BeerWineStoreFacet.sol";
 
-    // function setButcherName (string memory _newButcherName) external {
-    //     LibDiamond.enforceIsContractOwner();
-    //     LibMeatStore.setButcherName(_newButcherName);
-    // }   
-    // function getButcherName() external view returns (string memory _butcherName) {
-    //     _butcherName = LibMeatStore.getButcherName();
-    // }
-    // function buyMeat(uint256 _idx) external {
-    //     LibStore.isStoreOfProduct(address(this),_idx);
-    //     LibStore.StoreState storage  ds = LibStore.diamondStorage();
-    //     ds.salesPerProduct[_idx]++;
-    //     ds.itemSalesPerCustomer[msg.sender][_idx]++;
-    //     ds.salesPerCustomer[msg.sender]++;
-    // }
-    // function addMeat(string memory _newMeat) external {
-    //     LibDiamond.enforceIsContractOwner();
-    //     LibStore.StoreState storage ds = LibStore.diamondStorage();
-    //     ds.itemCounter.current();
-    //     ds.productName[ds.itemCounter.current()] = _newMeat;
-    // }
+// i want to add new Lib functions for this facet
+import {LibPharmacyWineFacet} from "../libraries/LibOthers.sol"; 
+
+// will inherit functions from BeerWineStoreFacet
+contract PharmacyWineFacet is BeerWineStoreFacet{
+
+    function addMedicine(string memory _newMedicine) external {
+        LibDiamond.enforceIsContractOwner();
+        LibStore.addItem(_newMedicine,address(this));
+    }
+
+    function buyMedicine(uint256 _idx, bool hasPrescription) external {
+        LibPharmacyWineFacet.enforcePrescription(hasPrescription);
+        LibStore.buyItem(_idx,address(this));
+    } 
 }

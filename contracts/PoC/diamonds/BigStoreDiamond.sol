@@ -8,7 +8,7 @@ pragma solidity ^0.8.0;
 * Implementation of a diamond.
 /******************************************************************************/
 
-import { LibBigDiamond } from "../libraries/LibDiamond.sol";
+import { LibDiamond } from "../libraries/LibDiamond.sol";
 import { IDiamondCut } from "../interfaces/IDiamondCut.sol";
 import { IDiamondLoupe } from  "../interfaces/IDiamondLoupe.sol";
 import { IERC173 } from "../interfaces/IERC173.sol";
@@ -29,8 +29,8 @@ struct DiamondArgs {
 contract BigStoreDiamond {    
 
     constructor(IDiamondCut.FacetCut[] memory _diamondCut, DiamondArgs memory _args) payable {
-        LibBigDiamond.setContractOwner(_args.owner);
-        LibBigDiamond.diamondCut(_diamondCut, _args.init, _args.initCalldata);
+        LibDiamond.setContractOwner(_args.owner);
+        LibDiamond.diamondCut(_diamondCut, _args.init, _args.initCalldata);
 
         // Code can be added here to perform actions and set state variables.
     }
@@ -38,8 +38,8 @@ contract BigStoreDiamond {
     // Find facet for function that is called and execute the
     // function if a facet is found and return any value.
     fallback() external payable {
-        LibBigDiamond.DiamondStorage storage ds;
-        bytes32 position = LibBigDiamond.DIAMOND_STORAGE_POSITION;
+        LibDiamond.DiamondStorage storage ds;
+        bytes32 position = LibDiamond.DIAMOND_STORAGE_POSITION;
         // get diamond storage
         assembly {
             ds.slot := position

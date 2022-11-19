@@ -131,3 +131,34 @@ library LibBeerWineStore {
 
 
 }
+
+library LibPharmacyWineFacet {
+
+  error UnderageCustomer();  
+
+  bytes32 constant DIAMOND_STORAGE_POSITION = keccak256("diamond.standard.diamond.storage.beer");
+  struct StoreState {
+      bool needPrescription;
+  }
+
+  function diamondStorage() internal pure returns (StoreState storage ds) {
+      bytes32 position = DIAMOND_STORAGE_POSITION;
+      assembly {
+          ds.slot := position
+      }
+  }
+
+  function setNeedPrescription (bool _need) internal {
+    StoreState storage storeState = diamondStorage();
+    storeState.needPrescription = _need;
+  }
+
+
+  function enforcePrescription(bool hasPrescription) internal view {
+    if(diamondStorage().needPrescription && !hasPrescription){
+        revert UnderageCustomer();
+    }    
+  }
+
+
+}

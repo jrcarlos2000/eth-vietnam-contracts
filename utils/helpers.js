@@ -2,7 +2,7 @@ const { createFixtureLoader } = require("ethereum-waffle");
 
 const {addresses} = require("../utils/addresses");
 const forkedNetwork = process.env.NETWORK;
-const diamondName = 'BigStore';
+const diamondName = process.env.DIAMOND_NAME;
 const isPolygon = hre.network.name === "polygon" || forkedNetwork == "polygon";
 const isMainnet = hre.network.name === "mainnet" || forkedNetwork == "mainnet";
 const isLocalHost = hre.network.name === "hardhat";

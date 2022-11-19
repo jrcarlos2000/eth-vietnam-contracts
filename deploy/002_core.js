@@ -14,8 +14,8 @@ async function deployDiamond () {
 
   const {deployerAddr} = await getNamedAccounts();
 
-  const dDiamondInit = await deployWithConfirmation(`${diamondName}DiamondInit`)
-  const cDiamondInit = await ethers.getContractAt(`${diamondName}DiamondInit`,dDiamondInit.address)
+  const dDiamondInit = await deployWithConfirmation(`BigStoreDiamondInit`)
+  const cDiamondInit = await ethers.getContractAt(`BigStoreDiamondInit`,dDiamondInit.address)
 
   const FacetNames = [
     'DiamondCutFacet',
@@ -25,8 +25,8 @@ async function deployDiamond () {
   // // The `facetCuts` variable is the FacetCut[] that contains the functions to add during diamond deployment
   const facetCuts = []
   for (const FacetName of FacetNames) {
-    const dFacet = await deployWithConfirmation(FacetName)
-    const cFacet = await ethers.getContractAt(FacetName,dFacet.address)
+    // const dFacet = await deployWithConfirmation(FacetName)
+    const cFacet = await ethers.getContract(FacetName)
     facetCuts.push({
       facetAddress: cFacet.address,
       action: FacetCutAction.Add,
@@ -49,7 +49,7 @@ async function deployDiamond () {
   }
 
   // deploy Diamond
-  const dDiamond = await deployWithConfirmation(`${diamondName}Diamond`,[facetCuts,diamondArgs])
+  const dDiamond = await deployWithConfirmation(`BigStoreDiamond`,[facetCuts,diamondArgs])
 
   // deploy Facets 
 //   await deployWithConfirmation("MeatStoreFacet");
@@ -63,5 +63,5 @@ const main = async () => {
 };
 
 main.id = "002_core";
-main.skip = () => diamondName != "BigStore";
+main.skip = () => (diamondName != "BigStore") && diamondName;
 module.exports = main;
