@@ -275,7 +275,6 @@ describe("Diamond 2 & 1: Big Store", async () => {
       await cPharmacyWineFacetProxy2.addAlcohol('Heineken');
       const storeItems = await cStoreBaseFacetProxy1.getAddr();
       console.log(storeItems, cStoreBaseFacetProxy1.address);
-      // expect(await cPharmacyWineFacetProxy2.getStoreItems())
     })
   });
 });

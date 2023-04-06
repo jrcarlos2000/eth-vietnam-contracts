@@ -1,5 +1,5 @@
 require("hardhat");
-const { utils } = require("ethers");
+const { utils, Wallet } = require("ethers");
 const { deployments, ethers, getNamedAccounts } = require("hardhat");
 const { parseUnits, formatUnits } = require("ethers").utils;
 const { isFork, diamondName, getSelectors, FacetCutAction } = require("../utils/helpers");
@@ -8,6 +8,7 @@ const {
   withConfirmation,
   log,
 } = require("../utils/deploy");
+
 
 async function deployDiamond () {
 
@@ -55,9 +56,9 @@ async function deployDiamond () {
 }
 
 const main = async () => {
-  await deployDiamond()
+  await deployDiamond();
 };
 
 main.id = "001_core";
-main.skip = () => (diamondName != "SmallStore") && diamondName;
+main.skip = () => false;
 module.exports = main;

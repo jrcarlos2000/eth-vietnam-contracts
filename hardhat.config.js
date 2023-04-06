@@ -51,9 +51,6 @@ module.exports = {
   },
   networks: {
     hardhat: {
-      accounts: {
-        mnemonic,
-      },
       chainId: 1337,
       initialBaseFeePerGas: 0,
     },

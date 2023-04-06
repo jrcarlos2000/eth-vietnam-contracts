@@ -59,9 +59,9 @@ async function deployDiamond () {
 }
 
 const main = async () => {
-  await deployDiamond()
+  await deployDiamond();
 };
 
 main.id = "002_core";
-main.skip = () => (diamondName != "BigStore") && diamondName;
+main.skip = () => true;
 module.exports = main;
