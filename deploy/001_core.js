@@ -10,7 +10,7 @@ const {
 } = require("../utils/deploy");
 
 
-async function deployDiamond () {
+async function deployDiamond() {
 
   const {deployerAddr} = await getNamedAccounts();
 
